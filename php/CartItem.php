@@ -4,6 +4,7 @@ class CartItem
 {
 
     private $book_id;
-    private
+    private $cart_id;
+
 
 }
