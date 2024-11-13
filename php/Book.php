@@ -19,10 +19,34 @@ class Book
         return $id;
     }
 
-    public static function getAll(){
+    public static function getAll() {
+        $jsonData = file_get_contents('bookdata.json');
 
-        file_get_contents('bookdata.json');
+        $booksArray = json_decode($jsonData, true);
+
+        $books = [];
+        foreach ($booksArray as $bookData) {
+            $books[] = new Book(
+                $bookData['id'],
+                $bookData['title'],
+                $bookData['price'],
+                $bookData['stock']
+            );
+        }
+        return $books;
     }
+
+    public function getId(): mixed
+    {
+        return $this->id;
+    }
+
+    public function setId(mixed $id): void
+    {
+        $this->id = $id;
+    }
+
+
 
     /**
      * @return mixed
