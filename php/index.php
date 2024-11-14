@@ -30,14 +30,22 @@ if (empty($books)) {
     echo "<p>Keine Bücher verfügbar.</p>";
 } else {
     echo "<table>";
-    echo "<tr><th>ID</th><th>Titel</th><th>Preis (EUR)</th><th>Verfügbar</th></tr>";
+    echo "<tr><th>Daten</th><th>Menge</th><th>Kaufen</th></tr>";
 
     foreach ($books as $book) {
         echo "<tr>";
-        echo "<td>" . htmlspecialchars($book->getId()) . "</td>";
-        echo "<td>" . htmlspecialchars($book->getTitle()) . "</td>";
-        echo "<td>" . number_format($book->getPrice(), 2, ',', '.') . "</td>";
-        echo "<td>" . $book->getStock() . "</td>";
+        echo "<td>" . htmlspecialchars($book->getTitle()) . '<br>' . number_format($book->getPrice(), 2, ',', '.') ."</td>";
+        echo "<td>";
+            if ($book->getStock() > 0) {
+            echo "<select name='quantity_{$book->getId()}'>";
+            for ($i = 1; $i <= $book->getStock(); $i++) {
+                echo "<option value='$i'>$i</option>";
+            }
+            echo "</select></td>";
+        } else {
+            echo "Ausverkauft</td>";
+        }
+        echo "<td></td>";
         echo "</tr>";
     }
 
