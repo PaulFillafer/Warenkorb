@@ -23,8 +23,11 @@
 
 <?php
 require_once 'Book.php';
+require_once 'CartItem.php';
 
 $books = Book::getAll();
+
+echo '<form action="verarbeitung.php" method="POST">';
 
 if (empty($books)) {
     echo "<p>Keine Bücher verfügbar.</p>";
@@ -45,7 +48,7 @@ if (empty($books)) {
         } else {
             echo "Ausverkauft</td>";
         }
-        echo "<td></td>";
+        echo "<td> <button name='button' type='submit' value='Kaufen'  </td>";
         echo "</tr>";
     }
 
